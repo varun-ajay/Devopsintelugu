@@ -1,0 +1,81 @@
+#Dependent Resources of Virtual Machine
+
+Components or resources required when creating a Virtual Machine (VM) are:
+    1.VNet      
+    2.Subnet    
+    3.NSG       
+    4.NIC      
+    5.Public IP 
+    6.Data Disk     
+
+1. VNet (Virtual Network)
+
+    Why needed:
+
+    It's like a private data center in the cloud.
+
+    It allows your VM to communicate securely with the internet, other VMs, services, etc.
+
+    You cannot deploy a VM without a VNet—it needs a network to connect to.
+
+    Think of it as: Your VM's private highway system.
+
+2. Subnet
+
+    Why needed:
+
+    A subnet divides the VNet into smaller sections.
+
+    Helps in organizing resources, improving security, and controlling traffic flow.
+
+    You place the VM inside a subnet, which is inside the VNet.
+
+    Think of it as: A neighborhood (subnet) inside the city (VNet).
+
+3. NSG (Network Security Group)
+
+    Why needed:
+
+    Acts like a firewall for controlling inbound and outbound traffic.
+
+    You use it to allow or block certain ports (e.g., allow port 22 for SSH or 3389 for RDP).
+
+    Applied to subnets or NICs.
+
+    Think of it as: Security guards at the gate who control who can enter or leave.
+
+4. NIC (Network Interface Card)
+
+    Why needed:
+
+    Connects the VM to the VNet (via a subnet).
+
+    Every VM must have at least one NIC.
+
+    The NIC is where you attach IP addresses (public/private), NSGs, etc.
+
+    Think of it as: The network plug of the VM—it connects it to the internet/network.
+
+5. Public IP
+
+    Why needed:
+
+    Optional, but required if you want your VM to be accessible from the internet.
+
+    Used for SSH (Linux), RDP (Windows), web hosting, etc.
+
+    Assigned to the NIC (or through a load balancer if using multiple VMs).
+
+    Think of it as: The VM’s phone number that people on the internet can dial.
+
+6. Data Disk
+
+    Why needed:
+
+    Stores the operating system, applications, and data.
+
+    At least one OS disk is required for the VM to boot.
+
+    You can also attach additional data disks as needed.
+
+    Think of it as: The hard drive of the VM.

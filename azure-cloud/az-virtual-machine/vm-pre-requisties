@@ -1,12 +1,12 @@
 #Dependent Resources of Virtual Machine
 
 Components or resources required when creating a Virtual Machine (VM) are:
-    1.VNet      
-    2.Subnet    
-    3.NSG       
-    4.NIC      
-    5.Public IP 
-    6.Data Disk     
+1.VNet      
+2.Subnet    
+3.NSG       
+4.NIC      
+5.Public IP 
+6.Data Disk     
 
 1. VNet (Virtual Network)
 

@@ -1,44 +1,41 @@
 #!/bin/bash
 
-# Exit on any error
 set -e
 
-echo "✅ Updating system packages..."
-sudo apt update && sudo apt upgrade -y
-
-echo "✅ Installing Java (OpenJDK 17)..."
-sudo apt install openjdk-17-jdk -y
-
-echo "✅ Installing git"
-sudo apt install git
-
-echo "✅ Verifying Java installation..."
-java -version
-
-echo "✅ Adding Jenkins GPG key..."
-curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-
-echo "✅ Adding Jenkins repository..."
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
-
-echo "✅ Updating package list with Jenkins repo..."
+echo "=== Updating system ==="
 sudo apt update
 
-echo "✅ Installing Jenkins..."
-sudo apt install jenkins -y
+echo "=== Installing required packages ==="
+sudo apt install -y curl gnupg ca-certificates
 
-echo "✅ Starting and enabling Jenkins service..."
-sudo systemctl start jenkins
+echo "=== Installing OpenJDK 17 ==="
+sudo apt install -y openjdk-17-jdk
+
+echo "=== Adding Jenkins GPG key ==="
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+echo "=== Adding Jenkins repository ==="
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+echo "=== Updating package list ==="
+sudo apt update
+
+echo "=== Installing Jenkins ==="
+sudo apt install -y jenkins
+
+echo "=== Enabling and starting Jenkins ==="
 sudo systemctl enable jenkins
+sudo systemctl start jenkins
 
-echo "✅ Checking Jenkins status..."
+echo "=== Jenkins status ==="
 sudo systemctl status jenkins --no-pager
 
-
-echo "✅ Jenkins installation completed!"
-echo "🔑 To unlock Jenkins, use the following command to get the admin password:"
-echo "    sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
-echo "🌐 Access Jenkins at: http://<your_server_ip>:8080"
+echo
+echo "=== Jenkins installed successfully! ==="
+echo "Access Jenkins at: http://localhost:8080"
+echo
+echo "Initial Admin Password:"
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
